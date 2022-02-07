@@ -5,7 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'email', component: EmailVerificationComponent },
+  { path: 'emailVerification', component: EmailVerificationComponent },
   { path: '**', component: HomeComponent },
 ];
 

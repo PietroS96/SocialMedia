@@ -12,18 +12,12 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'project-social';
   auth = new FirebaseTSAuth();
-  isLoggedIn = false;
 
   constructor(private loginSheet: MatBottomSheet, private router: Router) {
     this.auth.listenToSignInStateChanges((user) => {
       this.auth.checkSignInState({
-        whenSignedIn: (user) => {
-          alert('Logged in');
-          this.isLoggedIn = true;
-        },
-        whenSignedOut: (user) => {
-          alert('Logged out');
-        },
+        whenSignedIn: (user) => {},
+        whenSignedOut: (user) => {},
         whenSignedInAndEmailNotVerified: (user) => {
           this.router.navigate(['emailVerification']);
         },
