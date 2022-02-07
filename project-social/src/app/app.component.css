@@ -29,7 +29,7 @@
   justify-content: flex-end;
 }
 
-#nav-bar-items {
+.nav-bar-items {
   font-size: 1em;
   display: inline-block;
   cursor: pointer;

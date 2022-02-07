@@ -1,10 +1,15 @@
 <div id="nav-bar">
   <div id="nav-bar-content">
     <div id="nav-bar-left">
-      <div style="font-size: 1.5em" id="nav-bar-items">Social Test</div>
+      <div style="font-size: 1.5em" class="nav-bar-items">Social Test</div>
     </div>
     <div id="nav-bar-right">
-      <div id="nav-bar-items">Login</div>
+      <div *ngIf="!loggedIn()" (click)="onLoginClick()" class="nav-bar-items">
+        Accedi
+      </div>
+      <div *ngIf="loggedIn()" (click)="onLogoutClick()" class="nav-bar-items">
+        Logout
+      </div>
     </div>
   </div>
 </div>
