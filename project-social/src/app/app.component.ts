@@ -4,7 +4,6 @@ import { AuthenticatorComponent } from './tools/authenticator/authenticator.comp
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { Router } from '@angular/router';
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
-import firebase from 'firebase';
 
 @Component({
   selector: 'my-root',
@@ -41,6 +40,9 @@ export class AppComponent {
       onUpdate: (result) => {
         this.userDocument = <userDocument>result.data();
         this.userHasProfile = result.exists;
+        if (this.userHasProfile) {
+          this.router.navigate(['postfeed']);
+        }
       },
     });
   }
