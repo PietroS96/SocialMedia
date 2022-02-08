@@ -1,14 +1,14 @@
 <div id="nav-bar">
   <div id="nav-bar-content">
     <div id="nav-bar-left">
-      <div style="font-size: 1.5em" class="nav-bar-items">Social Test</div>
+      <div style="font-size: 1.5em" class="nav-bar-items">My Social</div>
     </div>
     <div id="nav-bar-right">
       <div *ngIf="!loggedIn()" (click)="onLoginClick()" class="nav-bar-items">
         Accedi
       </div>
       <div *ngIf="loggedIn() && userHasProfile" class="nav-bar-items">
-        Benvenuto {{ userDocument.publicName }}
+        Benvenuto {{ getUserName() }}
       </div>
       <div *ngIf="loggedIn()" (click)="onLogoutClick()" class="nav-bar-items">
         Logout

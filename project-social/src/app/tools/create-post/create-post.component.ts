@@ -45,7 +45,7 @@ export class CreatePostComponent implements OnInit {
             comment: comment,
             creatorId: this.auth.getAuth().currentUser?.uid,
             imageUrl: downlaodUrl,
-            timespam: FirebaseTSApp.getFirestoreTimestamp(),
+            timestamp: FirebaseTSApp.getFirestoreTimestamp(),
           },
           onComplete: (docId) => {
             this.dialog.close();
@@ -61,7 +61,7 @@ export class CreatePostComponent implements OnInit {
       data: {
         comment: comment,
         creatorId: this.auth.getAuth().currentUser?.uid,
-        timespam: FirebaseTSApp.getFirestoreTimestamp(),
+        timestamp: FirebaseTSApp.getFirestoreTimestamp(),
       },
       onComplete: (docId) => {
         this.dialog.close();
@@ -75,11 +75,11 @@ export class CreatePostComponent implements OnInit {
     let fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedImageFile);
     fileReader.addEventListener('loadend', (ev) => {
-      let redableString = fileReader.result!.toString();
+      let readbleString = fileReader.result!.toString();
       let postPreviewImage = <HTMLImageElement>(
         document.getElementById('post-preview-image')
       );
-      postPreviewImage.src = redableString;
+      postPreviewImage.src = readbleString;
     });
   }
 }

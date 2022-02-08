@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
@@ -15,13 +15,19 @@ export class AppComponent {
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore();
   userHasProfile = true;
-  userDocument!: userDocument;
+  private static userDocument: userDocument;
 
   constructor(private loginSheet: MatBottomSheet, private router: Router) {
     this.auth.listenToSignInStateChanges((user) => {
       this.auth.checkSignInState({
         whenSignedIn: (user) => {},
-        whenSignedOut: (user) => {},
+        whenSignedOut: (user) => {
+          AppComponent.userDocument = {
+            publicName: '',
+            description: '',
+            userId: '',
+          };
+        },
         whenSignedInAndEmailNotVerified: (user) => {
           this.router.navigate(['emailVerification']);
         },
@@ -33,13 +39,24 @@ export class AppComponent {
     });
   }
 
+  public static getUserDocument() {
+    return AppComponent.userDocument;
+  }
+
+  getUserName(): any {
+    try {
+      return AppComponent.userDocument.publicName;
+    } catch (err) {}
+  }
+
   getUserProfile() {
     this.firestore.listenToDocument({
       name: 'Getting Document',
       path: ['Users', this.auth.getAuth().currentUser!.uid],
       onUpdate: (result) => {
-        this.userDocument = <userDocument>result.data();
+        AppComponent.userDocument = <userDocument>result.data();
         this.userHasProfile = result.exists;
+        AppComponent.userDocument.userId = this.auth.getAuth().currentUser!.uid;
         if (this.userHasProfile) {
           this.router.navigate(['postfeed']);
         }
@@ -49,6 +66,7 @@ export class AppComponent {
 
   onLogoutClick() {
     this.auth.signOut();
+    this.router.navigate(['']);
   }
 
   loggedIn() {
@@ -62,4 +80,5 @@ export class AppComponent {
 export interface userDocument {
   publicName: string;
   description: string;
+  userId: string;
 }
