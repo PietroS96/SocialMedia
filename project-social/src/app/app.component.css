@@ -1,4 +1,5 @@
 #nav-bar {
+  background-color: #212227;
   position: fixed;
   top: 0;
   left: 0;
@@ -34,4 +35,8 @@
   display: inline-block;
   cursor: pointer;
   margin-right: 1em;
+}
+
+#chat-button {
+  z-index: 7;
 }

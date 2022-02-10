@@ -9,7 +9,20 @@
     <mat-icon (click)="onReplyClick()" class="action-item" color="warn"
       >chat_bubble_outline</mat-icon
     >
-    <mat-icon class="action-item" color="warn">favorite_border</mat-icon>
-    <mat-icon class="action-item" color="warn">save</mat-icon>
+    <mat-icon
+      *ngIf="!likeClicked"
+      (click)="onLikeClick()"
+      class="action-item"
+      color="warn"
+      >favorite_border</mat-icon
+    >
+    <mat-icon
+      *ngIf="likeClicked"
+      (click)="onLikeClick()"
+      class="action-item"
+      color="warn"
+      >favorite</mat-icon
+    >
   </mat-card-actions>
+  <mat-card-subtitle>Piace a</mat-card-subtitle>
 </mat-card>
